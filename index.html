@@ -66,7 +66,11 @@
 						price = parseInt(queryElements.price, 10);
 
 						// Get the sold seats from query parameters
-						const soldSeats = queryElements.seats_sold ? queryElements.seats_sold.split(',') : [];
+						const soldSeatsRaw = queryElements.seats_sold || '';
+							const soldSeats = soldSeatsRaw
+								.replace(/[{}%27]/g, '') // Remove curly braces and %27
+								.split(',') // Split by commas
+								.map(seat => seat.trim()); // Trim whitespace from each seat
 
 					$(document).ready(function () {
 						var $cart = $('#selected-seats'), //Sitting Area
