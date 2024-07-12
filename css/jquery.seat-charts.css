@@ -4,14 +4,14 @@ div.seatCharts-container {
 
 div.seatCharts-cell {
 
-	height: 16px;
-	width: 16px;
+	height: 10px;
+	width: 10px;
 	margin: 3px;
 	float: left;
 	text-align: center;
 	outline: none;
-	font-size: 13px;
-	line-height: 16px;
+	font-size: 7px;
+	line-height: 10px;
 	color: blue;
 
 }
