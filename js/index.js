@@ -18,8 +18,8 @@ $(document).ready(function() {
     dateSpan.textContent = `${queryElements.date}`;
 
     // Change the time span
-    const TimeSpan = document.getElementById("time");
-    TimeSpan.textContent = `${queryElements.time}`;
+    const timeSpan = document.getElementById("time");
+    timeSpan.textContent = `${queryElements.time}`;
 
     // Change the movie details
     const movieSpan = document.getElementById("movie_name");
@@ -28,4 +28,5 @@ $(document).ready(function() {
     // Change the theatre details
     const theatreSpan = document.getElementById("theatre_name");
     theatreSpan.textContent = `${queryElements.theatreName}`;
-});
+}
+)
