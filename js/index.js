@@ -13,9 +13,13 @@ $(document).ready(function() {
 
     const queryElements = getQueryParams();
 
-    // Change the date and time span
-    const dateTimeSpan = document.getElementById("date_time");
-    dateTimeSpan.textContent = `${queryElements.date} , ${queryElements.time}`;
+    // Change the date span
+    const dateSpan = document.getElementById("date");
+    dateSpan.textContent = `${queryElements.date}`;
+
+    // Change the time span
+    const TimeSpan = document.getElementById("time");
+    TimeSpan.textContent = `${queryElements.time}`;
 
     // Change the movie details
     const movieSpan = document.getElementById("movie_name");
