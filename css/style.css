@@ -255,9 +255,9 @@ p.copy_rights a:hover {
 
 div.seatCharts-cell {
 	color: var(--theme-title);
-	height: 29px;
-	width: 29px;
-	line-height: 27px;
+	height: 16px;
+	width: 16px;
+	line-height: 16px;
 	margin: 3px;
 	float: left;
 	text-align: center;
