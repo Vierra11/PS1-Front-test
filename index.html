@@ -67,7 +67,7 @@
 
 						// Get the sold seats from query parameters
 						const soldSeatsRaw = queryElements.seats_sold || '';
-							const soldSeats = soldSeatsRaw
+						const soldSeats = soldSeatsRaw
 								.replace(/[{}%27]/g, '') // Remove curly braces and %27
 								.split(',') // Split by commas
 								.map(seat => seat.trim()); // Trim whitespace from each seat
