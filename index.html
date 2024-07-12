@@ -63,13 +63,11 @@
 						const queryElements = getQueryParams();
 
 						// Update price if provided in the query
-						if (queryElements.price) {
-							price = parseInt(queryElements.price, 10);
-						}
+						price = parseInt(queryElements.price, 10);
 
 						// Get the sold seats from query parameters
 						const soldSeats = queryElements.seats_sold ? queryElements.seats_sold.split(',') : [];
-						
+
 					$(document).ready(function () {
 						var $cart = $('#selected-seats'), //Sitting Area
 							$counter = $('#counter'), //Votes
@@ -96,7 +94,7 @@
 							naming: {
 								top: false,
 								columns: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-								rows: ['A', 'B', ' ', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+								rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J'],
 								getLabel: function (character, row, column) {
 									return column;
 								}
