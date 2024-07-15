@@ -49,28 +49,28 @@
 					var firstSeatLabel = 1;
 
 					function getQueryParams() {
-							const params = {};
-							window.location.search
-								.substr(1)
-								.split("&")
-								.forEach(function (item) {
-									const [key, value] = item.split("=");
-									if (key) params[key] = decodeURIComponent(value);
-								});
-							return params;
-						}
+						const params = {};
+						window.location.search
+							.substr(1)
+							.split("&")
+							.forEach(function (item) {
+								const [key, value] = item.split("=");
+								if (key) params[key] = decodeURIComponent(value);
+							});
+						return params;
+					}
 
-						const queryElements = getQueryParams();
+					const queryElements = getQueryParams();
 
-						// Update price if provided in the query
-						price = parseInt(queryElements.price, 10);
+					// Update price if provided in the query
+					price = parseInt(queryElements.price, 10);
 
-						const soldSeatsRaw = queryElements.seats_sold || '';
-							const soldSeats = soldSeatsRaw
-								.replace(/{|}|%27|%20|'/g, '')  // Remove curly braces, %27, and %20
-								.split(',') // Split into an array
-								.map(seat => seat.trim()); // Trim whitespace
-						console.log(soldSeats)
+					const soldSeatsRaw = queryElements.seats_sold || '';
+					const soldSeats = soldSeatsRaw
+						.replace(/{|}|%27|%20|'/g, '')  // Remove curly braces, %27, and %20
+						.split(',') // Split into an array
+						.map(seat => seat.trim()); // Trim whitespace
+					console.log(soldSeats)
 
 					$(document).ready(function () {
 						var $cart = $('#selected-seats'), //Sitting Area
@@ -98,7 +98,7 @@
 							naming: {
 								top: false,
 								columns: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-								rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J'],
+								rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
 								getLabel: function (character, row, column) {
 									return column;
 								}
@@ -111,30 +111,15 @@
 									['a', 'selected', 'Selected']
 								]
 							},
-							// seats: {
-							// 	a: {
-							// 		classes: 'vip',
-							// 		price: VIP_price,
-							// 		category: 'VIP Seats'
-							// 	},
-							// 	b: {
-							// 		classes: 'economy',
-							// 		price: org_price,
-							// 		category: 'normal seats'
-							// 	}
-							// },
 
 
 							click: function () { //Click event
 								if (this.status() == 'available') { //optional seat
 									var rowLetter = getRowLetter(this.settings.row);
-									$('<li>R-' + (rowLetter) + '	S-' + this.settings.column + '</li>')
+									$((rowLetter) + '_' + this.settings.column + '</li>')
 										.attr('id', 'cart-item-' + this.settings.id)
 										.data('seatId', this.settings.id)
 										.appendTo($cart);
-
-									// var price = this.data().price,
-									// 	category = this.data().category;
 
 									$counter.text(sc.find('selected').length + 1);
 									$total.text(recalculateTotal(sc) + price);
@@ -174,7 +159,7 @@
 			</div>
 		</div>
 
-		<input type="button" name="next-step" class="next-step" value="Proceed to Payment" />
+		<a href="template/checkout.html" id="redirect-html" class="next-step">Proceed to Payment</a>
 
 		<script type="text/javascript" src="js/theme-change-seat-sel.js"></script>
 		<script src="js/jquery.nicescroll.js"></script>

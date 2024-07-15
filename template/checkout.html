@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon Practicum</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body>
+    <!--Banner image-->
+    <img id="practicum-logo" src="assets/Amazon_Pay-Logo.png" alt="Amazon Practicum" />
+
+    <!--Title and Disclaimer-->
+    <h1 id="title">Reservation checkout</h1>
+    <div id="timeWarning">Reach the restaurant 15 minutes before your booking time for a hassle-free experience</div>
+
+    <!--Checkout details box-->
+    <div id="checkout-details">
+      <div class="detail-item">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span id="date-and-time"></span>
+      </div>
+      <div class="detail-item">
+        <!--The map-marker icon is thinner than the others-->
+        <i id="map-marker" class="fa fa-map-marker" aria-hidden="true"></i>
+        <span id="restaurant-name"></span>
+      </div>
+      <div class="detail-item">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        <!--Box for guest count-->
+        <label for="guest-count">Guest count:</label>
+        <select name="guest-count" id="count">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+    </div>
+
+    <!--"Your details here"-->
+    <h2 class="hr-lines">YOUR DETAILS</h2>
+
+    <!--User information box-->
+    <div id="user-details">
+      <form>
+        <div class="form-group">
+          <label for="name">Name: </label>
+          <input type="text" id="name" name="name" />
+        </div>
+        <div class="form-group">
+          <label for="phone-number">Mobile number:</label>
+          <input type="text" id="phone-number" name="phone-number" />
+        </div>
+      </form>
+    </div>
+
+    <!--Amazon pay button-->
+    <a href="templates/payment_confirmation_hotel.html" id="redirect-html">
+      <div align="center" id="amazon-pay-button"></div>
+    </a>
+
+    <!--Warning incase details aren't filled out-->
+    <div id="error-msg"></div>
+
+    <!--Terms and conditions-->
+    <h2 class="hr-lines-2">TERMS AND CONDITIONS</h2>
+
+    <div id="t-and-c">
+      <ul>
+        <li>An internet handling fee will be applied as a convenience fee during final bill payment</li>
+        <li>Cover charges cannot be refunded if the slot is cancelled within 3 hours of start time</li>
+        <li>An offer on an app cannot be clubbed with other offers running at the restaurant</li>
+        <li>
+          An offer on the app may not be applicable on bottled drinks, buffets, pre-discounted platters/combos/thalis,
+          as per catch items, tobacco products, and special menus as per restaurant's discretion
+        </li>
+        <li>Amazon has no role to play on taxes and charges levied by the Government and Restaurants</li>
+        <li>Additional service charge on the bill is up to the restaurant's discretion</li>
+        <li>Other T&Cs may apply</li>
+      </ul>
+    </div>
+
+    <!--Additional Scripts-->
+    <script src="https://static-na.payments-amazon.com/checkout.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/index.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      const amazonPayButton = amazon.Pay.renderButton("#amazon-pay-button", {
+        merchantId: "merchant_id",
+        publicKeyId: "SANDBOX-xxxxxxxxxx",
+        ledgerCurrency: "USD",
+        checkoutLanguage: "en_US",
+        productType: "PayAndShip",
+        placement: "Cart",
+        buttonColor: "Gold",
+        estimatedOrderAmount: { amount: "109.99", currencyCode: "USD" },
+        //createCheckoutSessionConfig: {
+        //  payloadJSON: "payload",
+        //  signature: "xxxx",
+        //  algorithm: "AMZN-PAY-RSASSA-PSS-V2",
+        //},
+      });
+    </script>
+  </body>
+</html>
