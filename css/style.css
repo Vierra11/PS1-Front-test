@@ -434,7 +434,7 @@ ul.book-right li {
 #form {
 	text-align: center;
 	position: relative;
-	margin-top: 20px
+	margin-top: 20px;
 }
 
 #form fieldset {
@@ -445,39 +445,52 @@ ul.book-right li {
 	width: 100%;
 	margin: 0;
 	padding-bottom: 20px;
-	position: relative
+	position: relative;
 }
 
 .finish {
-	text-align: center
+	text-align: center;
 }
 
 #form fieldset:not(:first-of-type) {
-	display: none
+	display: none;
 }
 
-#form .previous-step,
+.previous-step,
 .next-step {
 	width: min-content;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
-	border-radius: 0px;
+	border-radius: 22px;
+	/* Updated to match button style */
 	cursor: pointer;
 	font-size: 0.8rem;
 	padding: 10px 35px;
 	margin: 10px 200px 10px 0px;
 	float: right;
-	border-radius: 22px;
+	background: var(--theme-rose);
+	/* Ensure button background is set */
 }
 
-.form,
 .previous-step {
 	background: #616161;
 }
 
-.form,
-.next-step {
+.next-step:hover,
+.previous-step:hover,
+.next-step:focus,
+.previous-step:focus {
+	background-color: #c70050;
+	/* Adjust hover/focus color */
+}
+
+.next-step:disabled {
+	background-color: #443d40;
+	/* Disabled button color */
+}
+
+.form {
 	margin-left: 50px;
 	margin-right: 450px;
 	margin-top: 180px;
@@ -487,16 +500,12 @@ ul.book-right li {
 #form .previous-step:hover,
 #form .previous-step:focus {
 	background-color: var(--theme-title);
-	color: var(--theme-bg)
+	color: var(--theme-bg);
 }
 
 #form .next-step:hover,
 #form .next-step:focus {
-	background-color: #c70050
-}
-
-#form .next-step:disabled {
-	background-color: #443d40
+	background-color: #c70050;
 }
 
 .text {
