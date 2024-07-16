@@ -25,9 +25,9 @@ async function fetchData(uuid) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        "uuid": uuid,
         "isMessageFromAWebApp": true,
         "stage": "init",
-        "uuid": uuid
       })
     });
 

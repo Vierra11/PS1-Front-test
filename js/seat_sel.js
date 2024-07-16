@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
         await sendData(uuid, amount, selectedSeats);
-        let paramStr = `?uuid=${encodeURIComponent(uuid)}&amount=${encodeURIComponent(amount)}&selected_seats=${encodeURIComponent(selectedSeats)}`;
+        let paramStr = `?uuid=${encodeURIComponent(uuid)}`;
         redirectElement.href += paramStr;
     } catch (error) {
         console.error("Error sending data: ", error);
