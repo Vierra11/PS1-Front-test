@@ -36,6 +36,7 @@ async function fetchData(uuid) {
     } else {
       const data = await response.json();
       queryElements = JSON.parse(data.body);
+      console.log(queryElements);
       // Change the date span
       const dateSpan = document.getElementById("date");
       dateSpan.textContent = `${queryElements.date}`;
