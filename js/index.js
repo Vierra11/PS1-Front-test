@@ -35,7 +35,7 @@ async function fetchData(uuid) {
             throw new Error("Network response was not ok " + response.statusText);
         } else {
             const data = await response.json();
-            console.log("Response data:", data); // Debug log
+            console.log("Full response data:", data); // Debug log
 
             if (data.body) {
                 queryElements = JSON.parse(data.body);
