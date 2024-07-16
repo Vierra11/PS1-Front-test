@@ -36,6 +36,7 @@ async function fetchData(uuid) {
     }
 
     const data = await response.json();
+    console.log("Received data:", data);
 
     // Check if data.body exists and is a valid JSON
     if (data.body) {
