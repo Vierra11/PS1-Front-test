@@ -36,13 +36,28 @@ async function fetchData(uuid) {
     } else {
       const data = await response.json();
       queryElements = JSON.parse(data.body);
-      // Change the date and time span
-      const dateTimeSpan = document.getElementById("date-and-time");
-      dateTimeSpan.textContent = `${queryElements.date} at ${queryElements.time}`;
+      // Change the date span
+      const dateSpan = document.getElementById("date");
+      dateSpan.textContent = `${queryElements.date}`;
 
-      // Change the restaurant details
-      const restaurantSpan = document.getElementById("restaurant-name");
-      restaurantSpan.textContent = `${queryElements.restaurant_name}`;
+      // Change the time span
+      const timeSpan = document.getElementById("time");
+      timeSpan.textContent = `${queryElements.time}`;
+
+      // Change the movie details
+      const movieSpan = document.getElementById("movie_name");
+      movieSpan.textContent = `${queryElements.movieName}`;
+
+      // Change the theatre details
+      const theatreSpan = document.getElementById("theatre_name");
+      theatreSpan.textContent = `${queryElements.theatreName}`;
+
+      const amountSpan = document.getElementById("amount");
+      amountSpan.textContent = `${queryElements.amount}`;
+
+      const selected_seatsSpan = document.getElementById("selected_seats");
+      selected_seatsSpan.textContent = `${queryElements.selected_seats}`;
+
     }
   } catch (error) {
     console.error("There was an error: ", error);
@@ -50,13 +65,6 @@ async function fetchData(uuid) {
 }
 
 fetchData(uuid);
-
-// Obtain guest count
-const guestCountElement = document.getElementById("count");
-let guestCount = 1;
-guestCountElement.addEventListener("change", (event) => {
-  guestCount = event.target.value;
-})
 
 // Obtain name and phone-number details
 const guestNameElement = document.getElementById("name");
