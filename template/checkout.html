@@ -5,13 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amazon Practicum</title>
-  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="../css/index.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body>
   <!--Banner image-->
-  <img id="practicum-logo" src="assets/Amazon_Pay-Logo.png" alt="Amazon Practicum" />
+  <img id="practicum-logo" src="../assets/Amazon_Pay-Logo.png" alt="Amazon Practicum" />
 
   <!--Title and Disclaimer-->
   <h1 id="title">Reservation checkout</h1>
@@ -74,7 +74,7 @@
   </div>
 
   <!--Amazon pay button-->
-  <a href="templates/payment_confirmation_hotel.html" id="redirect-html">
+  <a href="../templates/payment_confirmation_hotel.html" id="redirect-html">
     <div align="center" id="amazon-pay-button"></div>
   </a>
 
@@ -101,7 +101,7 @@
 
   <!--Additional Scripts-->
   <script src="https://static-na.payments-amazon.com/checkout.js"></script>
-  <script type="text/javascript" charset="utf-8" src="js/index.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/index.js"></script>
   <script type="text/javascript" charset="utf-8">
     const amazonPayButton = amazon.Pay.renderButton("#amazon-pay-button", {
       merchantId: "merchant_id",
