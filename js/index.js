@@ -1,143 +1,92 @@
+// Example request: http://localhost:8080/?uuid=<ID>
+
 const WEBHOOK = "https://istzsvbhkf.execute-api.ap-south-1.amazonaws.com/test";
 
 function getQueryParams() {
-    const params = {};
-    window.location.search
-        .substr(1)
-        .split("&")
-        .forEach(function(item) {
-        const [key, value] = item.split("=");
-        if (key) params[key] = decodeURIComponent(value);
+  const params = {};
+  window.location.search
+    .substr(1)
+    .split("&")
+    .forEach(function(item) {
+      const [key, value] = item.split("=");
+      if (key) params[key] = decodeURIComponent(value);
     });
-    return params;
+  return params;
 }
 
 const uuid = getQueryParams().uuid;
 let queryElements;
 
 async function fetchData(uuid) {
-    console.log("Fetching data for UUID:", uuid); // Debug log
+  try {
+    const response = await fetch(WEBHOOK, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "isMessageFromAWebApp": true,
+        "stage": "init",
+        "uuid": uuid
+      })
+    });
 
-    try {
-        const response = await fetch(WEBHOOK, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "isMessageFromAWebApp": true,
-                "stage": "init",
-                "uuid": uuid
-            })
-        });
+    if (!response.ok) {
+      throw new response("Network response was not ok " + response.statusText)
+    } else {
+      const data = await response.json();
+      queryElements = JSON.parse(data.body);
+      // Change the date and time span
+      const dateTimeSpan = document.getElementById("date-and-time");
+      dateTimeSpan.textContent = `${queryElements.date} at ${queryElements.time}`;
 
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
-        } else {
-            const data = await response.json();
-            console.log("Full response data:", data); // Debug log
-
-            if (data.body) {
-                queryElements = JSON.parse(data.body);
-                console.log("Parsed queryElements:", queryElements); // Debug log
-
-                // Change the date span
-                const dateSpan = document.getElementById("date");
-                dateSpan.textContent = `${queryElements.date}`;
-
-                // Change the time span
-                const timeSpan = document.getElementById("time");
-                timeSpan.textContent = `${queryElements.time}`;
-
-                // Change the movie details
-                const movieSpan = document.getElementById("movie_name");
-                movieSpan.textContent = `${queryElements.movie_name}`;
-
-                // Change the theatre details
-                const theatreSpan = document.getElementById("theatre_name");
-                theatreSpan.textContent = `${queryElements.theatre_name}`;
-
-                // Set price and sold seats
-                window.price = parseInt(queryElements.price, 10);
-
-                if (queryElements.sold_seats && Array.isArray(queryElements.sold_seats)) {
-                    const soldSeats = queryElements.sold_seats.map(seat => seat.trim());
-                    console.log("Sold seats:", soldSeats); // Debug log
-
-                    const sc = $('#seat-map').seatCharts();
-                    sc.get(soldSeats).status('unavailable');
-                } else {
-                    console.warn("Sold seats are undefined or not an array");
-                }
-            } else {
-                console.error("Data body is undefined or null");
-            }
-        }
-    } catch (error) {
-        console.error("There was an error:", error);
+      // Change the restaurant details
+      const restaurantSpan = document.getElementById("restaurant-name");
+      restaurantSpan.textContent = `${queryElements.restaurant_name}`;
     }
+  } catch (error) {
+    console.error("There was an error: ", error);
+  }
 }
 
 fetchData(uuid);
 
-// Obtain selected_seats
-function getSelectedSeats() {
-    const selectedSeats = [];
-    document.querySelectorAll('#selected-seats li').forEach(seat => {
-    selectedSeats.push(seat.textContent.trim());
-    });
-    return selectedSeats.join(',');
-}
+// Obtain guest count
+const guestCountElement = document.getElementById("count");
+let guestCount = 1;
+guestCountElement.addEventListener("change", (event) => {
+  guestCount = event.target.value;
+})
 
-// Obtain total amount
-function getTotalAmount() {
-    return document.getElementById('total').textContent;
-}
+// Obtain name and phone-number details
+const guestNameElement = document.getElementById("name");
+const phoneNumberElement = document.getElementById("phone-number");
 
-document.addEventListener("DOMContentLoaded", function () {
-    const redirectElement = document.getElementById("redirect-html");
-    const errorElement = document.getElementById("error-msg");
+let guestName = "";
+let phoneNumber = "";
 
-    redirectElement.addEventListener("click", async (event) => {
-    const selectedSeats = getSelectedSeats();
-    const amount = getTotalAmount();
+guestNameElement.addEventListener("input", (event) => {
+  guestName = event.target.value;
+})
 
-    try {
-        await sendData(uuid, amount, selectedSeats);
-        let paramStr = `?uuid=${encodeURIComponent(uuid)}&amount=${encodeURIComponent(amount)}&selected_seats=${encodeURIComponent(selectedSeats)}`;
-        redirectElement.href += paramStr;
-    } catch (error) {
-        console.error("Error sending data: ", error);
-        event.preventDefault();
-        errorElement.classList.add("active");
-        errorElement.textContent = "There was an error processing your request. Please try again.";
-    }
-    });
-});
+phoneNumberElement.addEventListener("input", (event) => {
+  phoneNumber = event.target.value;
+})
 
-async function sendData(uuid, amount, selectedSeats) {
-    try {
-    const response = await fetch(WEBHOOK, {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            "isMessageFromAWebApp": true,
-            "stage": "update",
-            "uuid": uuid,
-            "append": {
-                "amount": amount,
-                "selected_seats": selectedSeats
-            }
-        })
-    });
-
-    if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-    } 
-    } 
-    catch (error) {
-    console.error("There was an error: ", error);
-    }
-}
+// Append parameters to the redirect URL
+const redirectElement = document.getElementById("redirect-html")
+const errorElement = document.getElementById("error-msg");
+redirectElement.addEventListener("click", (event) => {
+  let paramStr = `?uuid=${encodeURIComponent(uuid)}&name=${encodeURIComponent(guestName)}&number=${encodeURIComponent(phoneNumber)}&guestCount=${encodeURIComponent(guestCount)}`;
+  if (guestName === "") {
+    event.preventDefault()
+    errorElement.classList.add("active")
+    errorElement.textContent = "Please enter your name";
+  } else if (phoneNumber.length != 10 || isNaN(phoneNumber) || isNaN(parseFloat(phoneNumber))) {
+    event.preventDefault()
+    errorElement.classList.add("active")
+    errorElement.textContent = "Please enter a valid number";
+  } else {
+    redirectElement.href += paramStr;
+  }
+})

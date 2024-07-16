@@ -1,0 +1,161 @@
+@font-face {
+  font-family: Rubik;
+  src: url("../font/Rubik-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: JuliaMono;
+  src: url("../font/JuliaMono-Regular.ttf") format("truetype");
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f0f0f0;
+}
+
+#practicum-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-height: 20vh;
+}
+
+#check-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-height: 10vh;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+#success-msg {
+  font-family: Rubik;
+  font-weight: bold;
+  justify-content: center;
+  color: black;
+  font-size: 24px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#warn-msg {
+  font-family: Rubik;
+  font-weight: Bold;
+  text-align: center;
+  color: grey;
+  width: 80%;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+ul {
+  display: flex;
+}
+
+ul li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1px;
+}
+
+ul li .icons {
+  font-size: 25px;
+  color: #1b761b;
+  margin: 0 60px;
+}
+
+ul li .label {
+  font-family: JuliaMono;
+  letter-spacing: 1px;
+  font-size: 6px;
+  font-weight: bold;
+  color: #1b761b;
+}
+
+ul li .step {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #d7d7c3;
+  margin: 16px 0 1px;
+  display: grid;
+  place-items: center;
+  color: ghostwhite;
+  position: relative;
+  cursor: pointer;
+}
+
+.step::after {
+  content: "";
+  position: absolute;
+  width: 115px;
+  height: 3px;
+  background-color: #d7d7c3;
+  right: 30px;
+}
+
+.first::after {
+  width: 0;
+  height: 0;
+}
+
+ul li .step .awesome {
+  display: none;
+}
+
+ul li .step p {
+  font-size: 10px;
+}
+
+ul li .active {
+  background-color: #1b761b;
+}
+
+li .active::after {
+  background-color: #1b761b;
+}
+
+ul li .active p {
+  display: none;
+}
+
+ul li .active .awesome {
+  display: flex;
+}
+
+#barcode {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+}
+
+hr {
+  margin-top: 20px;
+  color: grey;
+  width: 80%;
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon Practicum</title>
+    <link rel="stylesheet" href="../css/payment_confirmation_hotel.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body>
+    <!--Banner image-->
+    <img id="practicum-logo" src="../assets/Amazon_Pay-Logo.png" alt="Amazon Practicum" />
+
+    <!--Check-->
+    <img id="check-logo" src="../assets/check.png" alt="Payment confirmed" />
+
+    <!--Payment complete text-->
+    <div id="success-msg">Payment Successful</div>
+
+    <!--Payment not really complete text-->
+    <span id="warn-msg"></span>
+
+    <!--Progress bar-->
+    <ul>
+      <li>
+        <i class="icons awesome fa fa-user" aria-hidden="true"></i>
+        <div class="step first">
+          <p>1</p>
+          <i class="awesome fa fa-check" aria-hidden="true"></i>
+        </div>
+        <p class="label">Enter info</p>
+      </li>
+      <li>
+        <i class="icons awesome fa fa-credit-card" aria-hidden="true"></i>
+        <div class="step second">
+          <p>2</p>
+          <i class="awesome fa fa-check" aria-hidden="true"></i>
+        </div>
+        <p class="label">Process payment</p>
+      </li>
+      <li>
+        <i class="icons awesome fa fa-cutlery" aria-hidden="true"></i>
+        <div class="step third">
+          <p>3</p>
+          <i class="awesome fa fa-check" aria-hidden="true"></i>
+        </div>
+        <p class="label">Reserve seat</p>
+      </li>
+    </ul>
+    <!--QR code-->
+    <img id='barcode' alt="QR Code" width="100" height="100" />
+    <hr>
+    <script type="text/javascript" charset="utf-8" src="../js/payment_confirmation_hotel.js"></script>
+  </body>
+</html>

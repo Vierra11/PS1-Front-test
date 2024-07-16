@@ -1,0 +1,218 @@
+@font-face {
+  font-family: Rubik;
+  src: url("../font/Rubik-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: JuliaMono;
+  src: url("../font/JuliaMono-Regular.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+#practicum-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-height: 20vh;
+}
+
+#title {
+  color: #161616;
+  text-align: center;
+  font-family: Rubik;
+}
+
+#timeWarning {
+  text-align: center;
+  font-family: Rubik;
+  font-weight: bold;
+  color: #e7e7e7;
+  background-color: #040273;
+  padding: 20px 40px 20px 40px;
+  border: 1px solid;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 10vh;
+}
+
+#checkout-details {
+  font-family: JuliaMono;
+  font-weight: bold;
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.detail-item {
+  margin-bottom: 10px;
+  font-family: JuliaMono;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.detail-item i {
+  margin-right: 10px;
+  flex: 0 0 auto;
+  font-size: 18;
+}
+
+#map-marker {
+  margin-right: 15px;
+  flex: 0 0 auto;
+  font-size: 18;
+}
+
+.detail-item span {
+  flex: 1;
+}
+
+.hr-lines {
+  font-family: JuliaMono;
+  font-size: 16px;
+  position: relative;
+  max-width: 500px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.hr-lines:before {
+  content: " ";
+  display: block;
+  height: 2px;
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background: grey;
+}
+
+.hr-lines:after {
+  content: " ";
+  height: 2px;
+  width: var(--line-width, 30px);
+  background: grey;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  width: 100px;
+  text-align: left;
+  margin-right: 15px;
+}
+
+.form-group input {
+  font-family: JuliaMono;
+  border: 1px solid #add8e6;
+  border-radius: 4px;
+  flex: 1;
+  padding: 12px 20px;
+  transition: 0.5s;
+}
+
+.form-group input[type="text"]:focus {
+  transition: 0.5s;
+  border: 1px solid #555;
+  border-radius: 4px;
+  flex: 1;
+}
+
+#user-details {
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 70vh;
+}
+
+#amazon-pay-button {
+  display: block;
+  width: fit-content;
+  height: 45px;
+  position: relative;
+  margin: 12px auto;
+  z-index: 1000;
+}
+
+#error-msg.active {
+  font-family: Rubik;
+  font-weight: bold;
+  background-color: #fff;
+  color: red;
+  padding: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.hr-lines-2 {
+  font-family: JuliaMono;
+  font-size: 16px;
+  position: relative;
+  max-width: 500px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.hr-lines-2:before {
+  content: " ";
+  display: block;
+  height: 2px;
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background: grey;
+}
+
+.hr-lines-2:after {
+  content: " ";
+  height: 2px;
+  width: var(--line-width, 80px);
+  width: 30px;
+  background: grey;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+#t-and-c {
+  font-family: Rubik;
+  background-color: #fff;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 70vh;
+}
