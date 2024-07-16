@@ -48,29 +48,19 @@
 				<script type="text/javascript">
 					var firstSeatLabel = 1;
 
-					function getQueryParams() {
-						const params = {};
-						window.location.search
-							.substr(1)
-							.split("&")
-							.forEach(function (item) {
-								const [key, value] = item.split("=");
-								if (key) params[key] = decodeURIComponent(value);
-							});
-						return params;
-					}
+					// function getQueryParams() {
+					// 		const params = {};
+					// 		window.location.search
+					// 			.substr(1)
+					// 			.split("&")
+					// 			.forEach(function (item) {
+					// 				const [key, value] = item.split("=");
+					// 				if (key) params[key] = decodeURIComponent(value);
+					// 			});
+					// 		return params;
+					// 	}
 
-					const queryElements = getQueryParams();
-
-					// Update price if provided in the query
-					price = parseInt(queryElements.price, 10);
-
-					const soldSeatsRaw = queryElements.seats_sold || '';
-					const soldSeats = soldSeatsRaw
-						.replace(/{|}|%27|%20|'/g, '')  // Remove curly braces, %27, and %20
-						.split(',') // Split into an array
-						.map(seat => seat.trim()); // Trim whitespace
-					console.log(soldSeats)
+					// 	const queryElements = getQueryParams();
 
 					$(document).ready(function () {
 						var $cart = $('#selected-seats'), //Sitting Area
@@ -81,6 +71,11 @@
 							return String.fromCharCode(65 + rowNumber)
 						}
 
+						// // Initialize sold seats after fetching data
+						// if (queryElements.soldSeats) {
+						// 	const soldSeats = queryElements.soldSeats.split(',').map(seat => seat.trim());
+						// 	sc.get(soldSeats).status('unavailable');
+						// } 
 
 						var sc = $('#seat-map').seatCharts({
 							map: [ //Seating chart
@@ -142,8 +137,8 @@
 								}
 							}
 						});
-						//sold seat
-						sc.get(soldSeats).status('unavailable');
+
+
 
 					});
 					//sum total money
