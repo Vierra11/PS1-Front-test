@@ -68,6 +68,9 @@ async function fetchData(uuid) {
       const selected_seatsSpan = document.getElementById("selected_seats");
       selected_seatsSpan.textContent = queryElements.selected_seats || "N/A";
 
+      const redirectLink = document.getElementById("redirect-html");
+      redirectLink.href = `payment_confirmation_movie.html?uuid=${encodeURIComponent(uuid)}`;
+
     } else {
       console.error("Response body is undefined");
     }
@@ -82,7 +85,7 @@ fetchData(uuid);
 const guestNameElement = document.getElementById("name");
 const phoneNumberElement = document.getElementById("phone-number");
 
-let guestName = "";
+
 let phoneNumber = "";
 
 guestNameElement.addEventListener("input", (event) => {
@@ -97,7 +100,7 @@ phoneNumberElement.addEventListener("input", (event) => {
 const redirectElement = document.getElementById("redirect-html")
 const errorElement = document.getElementById("error-msg");
 redirectElement.addEventListener("click", (event) => {
-  let paramStr = `?uuid=${encodeURIComponent(uuid)}&name=${encodeURIComponent(guestName)}&number=${encodeURIComponent(phoneNumber)}&guestCount=${encodeURIComponent(guestCount)}`;
+  let paramStr = `?uuid=${encodeURIComponent(uuid)}&name=${encodeURIComponent(guestName)}&number=${encodeURIComponent(phoneNumber)}`;
   if (guestName === "") {
     event.preventDefault()
     errorElement.classList.add("active")
@@ -108,5 +111,8 @@ redirectElement.addEventListener("click", (event) => {
     errorElement.textContent = "Please enter a valid number";
   } else {
     redirectElement.href += paramStr;
+    const redirectLink = document.getElementById("redirect-html");
+    redirectLink.href = `payment_confirmation_movie.html?uuid=${encodeURIComponent(uuid)}&name=${encodeURIComponent(guestName)}&number=${encodeURIComponent(phoneNumber)}`;
+
   }
 })
