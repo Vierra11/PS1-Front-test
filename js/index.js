@@ -57,10 +57,10 @@ async function fetchData(uuid) {
       timeSpan.textContent = queryElements.time || "N/A";
 
       const movieSpan = document.getElementById("movie_name");
-      movieSpan.textContent = queryElements.movieName || "N/A";
+      movieSpan.textContent = queryElements.movie_name || "N/A";
 
       const theatreSpan = document.getElementById("theatre_name");
-      theatreSpan.textContent = queryElements.theatreName || "N/A";
+      theatreSpan.textContent = queryElements.theatre_name || "N/A";
 
       const amountSpan = document.getElementById("amount");
       amountSpan.textContent = queryElements.amount || "N/A";
@@ -75,7 +75,6 @@ async function fetchData(uuid) {
     console.error("There was an error: ", error);
   }
 }
-
 
 fetchData(uuid);
 
