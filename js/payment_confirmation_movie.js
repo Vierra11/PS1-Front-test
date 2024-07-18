@@ -23,9 +23,14 @@ second.classList.add("active");
 
 // Update the contents of warnMsg
 const warnMsg = document.getElementById("warn-msg")
-warnMsg.textContent = `Your payment was successfully processed. You may scan the QR code to keep a copy of your details. The reservation will be completed shortly`
+warnMsg.textContent = `Your payment was successfully processed. You may scan the QR code to keep a copy of your details. The booking for the vehicle will be completed shortly`
 
-async function sendData(uuid, name, guestCount) {
+// Add an image
+const imgElement = document.getElementById("barcode")
+const data = JSON.stringify(queryElements)
+imgElement.src = `https://api.qrserver.com/v1/create-qr-code/?data=${data}&amp;size=50x50`;
+
+async function sendData(uuid, name, number) {
   try {
     const response = await fetch(WEBHOOK, {
       method: "POST",
@@ -38,7 +43,7 @@ async function sendData(uuid, name, guestCount) {
         "uuid": uuid,
         "append": {
           "name": name,
-          "guestCount": guestCount
+          "number": number,
         }
       })
     });
@@ -46,16 +51,12 @@ async function sendData(uuid, name, guestCount) {
     if (!response.ok) {
       throw new response("Network response was not ok " + response.statusText)
     } else {
-      const result = await response.json();
-      const data = result.body;
-
-      // Add an image
-      const imgElement = document.getElementById("barcode")
-      imgElement.src = `https://api.qrserver.com/v1/create-qr-code/?data=${data}&amp;size=50x50`;
+      const data = await response.json();
+      console.log(data);
     }
   } catch (error) {
     console.error("There was an error: ", error);
   }
 }
 
-sendData(queryElements.uuid, queryElements.name, queryElements.guestCount);
+sendData(queryElements.uuid, queryElements.name, queryElements.number);
