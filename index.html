@@ -111,7 +111,7 @@
 							click: function () { //Click event
 								if (this.status() == 'available') { //optional seat
 									var rowLetter = getRowLetter(this.settings.row);
-									$('<li>' + (rowLetter+1) + '_' + this.settings.column + '</li>')
+									$('<li>' + (rowLetter) + '_' + (this.settings.column+1) + '</li>')
 										.attr('id', 'cart-item-' + this.settings.id)
 										.data('seatId', this.settings.id)
 										.appendTo($cart);
