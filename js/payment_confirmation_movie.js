@@ -23,7 +23,7 @@ second.classList.add("active");
 
 // Update the contents of warnMsg
 const warnMsg = document.getElementById("warn-msg")
-warnMsg.textContent = `Your payment was successfully processed. You may scan the QR code to keep a copy of your details. The booking for the vehicle will be completed shortly`
+warnMsg.textContent = `Your payment was successfully processed. You may scan the QR code to keep a copy of your details.The tickets will be booked shortly`
 
 // Add an image
 const imgElement = document.getElementById("barcode")
