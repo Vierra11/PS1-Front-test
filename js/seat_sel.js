@@ -60,16 +60,17 @@ async function fetchData(uuid) {
         // Set price and sold seats
         window.price = parseInt(queryElements.price, 10);
 
-        if (queryElements.sold_seats && Array.isArray(queryElements.sold_seats)) {
-            const soldSeats = queryElements.sold_seats.map(seat => seat.trim());
-          console.log("Sold seats:", soldSeats); // Debug log
+        if (queryElements.sold_seats && typeof queryElements.sold_seats === 'string') {
+        // Remove all spaces and split the string into an array by commas
+        const soldSeats = queryElements.sold_seats.replace(/\s+/g, '').split(',');
 
-            const sc = $('#seat-map').seatCharts();
-            sc.get(soldSeats).status('unavailable');
+        console.log("Sold seats:", soldSeats); // Debug log
+
+        const sc = $('#seat-map').seatCharts();
+        sc.get(soldSeats).status('unavailable');
         } else {
-            console.warn("Sold seats are undefined or not an array");
+        console.warn("Sold seats are undefined or not a string");
         }
-
 
         const redirectLink = document.getElementById("redirect-html");
         redirectLink.href = `template/checkout.html?uuid=${encodeURIComponent(uuid)}`;
