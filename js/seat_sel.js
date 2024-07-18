@@ -8,73 +8,78 @@ function getQueryParams() {
         .forEach(function(item) {
         const [key, value] = item.split("=");
         if (key) params[key] = decodeURIComponent(value);
-    });
-    return params;
+        });
+return params;
 }
 
 const uuid = getQueryParams().uuid;
 let queryElements;
 
 async function fetchData(uuid) {
-    console.log("Fetching data for UUID:", uuid); // Debug log
+  console.log("Fetching data for UUID:", uuid); // Debug log
 
     try {
-        const response = await fetch(WEBHOOK, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "isMessageFromAWebApp": true,
-                "stage": "init",
-                "uuid": uuid
-            })
-        });
+    const response = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+        "isMessageFromAWebApp": true,
+        "stage": "init",
+        "uuid": uuid
+        })
+    });
 
-        if (!response.ok) {
-            throw new Error("Network response was not ok " + response.statusText);
+    if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+    } else {
+        const data = await response.json();
+      console.log("Full response data:", data); // Debug log
+
+        if (data.body) {
+        queryElements = JSON.parse(data.body);
+        console.log("Parsed queryElements:", queryElements); // Debug log
+
+        // Change the date span
+        const dateSpan = document.getElementById("date");
+        dateSpan.textContent = `${queryElements.date}`;
+
+        // Change the time span
+        const timeSpan = document.getElementById("time");
+        timeSpan.textContent = `${queryElements.time}`;
+
+        // Change the movie details
+        const movieSpan = document.getElementById("movie_name");
+        movieSpan.textContent = `${queryElements.movie_name}`;
+
+        // Change the theatre details
+        const theatreSpan = document.getElementById("theatre_name");
+        theatreSpan.textContent = `${queryElements.theatre_name}`;
+
+        // Set price and sold seats
+        window.price = parseInt(queryElements.price, 10);
+
+        if (queryElements.sold_seats && Array.isArray(queryElements.sold_seats)) {
+            const soldSeats = queryElements.sold_seats.map(seat => seat.trim());
+          console.log("Sold seats:", soldSeats); // Debug log
+
+            const sc = $('#seat-map').seatCharts();
+            sc.get(soldSeats).status('unavailable');
         } else {
-            const data = await response.json();
-            console.log("Full response data:", data); // Debug log
-
-            if (data.body) {
-                queryElements = JSON.parse(data.body);
-                console.log("Parsed queryElements:", queryElements); // Debug log
-
-                // Change the date span
-                const dateSpan = document.getElementById("date");
-                dateSpan.textContent = `${queryElements.date}`;
-
-                // Change the time span
-                const timeSpan = document.getElementById("time");
-                timeSpan.textContent = `${queryElements.time}`;
-
-                // Change the movie details
-                const movieSpan = document.getElementById("movie_name");
-                movieSpan.textContent = `${queryElements.movie_name}`;
-
-                // Change the theatre details
-                const theatreSpan = document.getElementById("theatre_name");
-                theatreSpan.textContent = `${queryElements.theatre_name}`;
-
-                // Set price and sold seats
-                window.price = parseInt(queryElements.price, 10);
-
-                if (queryElements.sold_seats && Array.isArray(queryElements.sold_seats)) {
-                    const soldSeats = queryElements.sold_seats.map(seat => seat.trim());
-                    console.log("Sold seats:", soldSeats); // Debug log
-
-                    const sc = $('#seat-map').seatCharts();
-                    sc.get(soldSeats).status('unavailable');
-                } else {
-                    console.warn("Sold seats are undefined or not an array");
-                }
-            } else {
-                console.error("Data body is undefined or null");
-            }
+            console.warn("Sold seats are undefined or not an array");
         }
+
+
+        const redirectLink = document.getElementById("redirect-html");
+        redirectLink.href = `template/checkout.html?uuid=${encodeURIComponent(uuid)}`;
+
+        } else {
+            console.error("Data body is undefined or null");
+        }
+    }
     } catch (error) {
-        console.error("There was an error:", error);
+    console.error("There was an error:", error);
     }
 }
 
@@ -94,7 +99,7 @@ function getTotalAmount() {
     return document.getElementById('total').textContent;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     const redirectElement = document.getElementById("redirect-html");
     const errorElement = document.getElementById("error-msg");
 
@@ -123,20 +128,20 @@ async function sendData(uuid, amount, selectedSeats) {
         "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "isMessageFromAWebApp": true,
-            "stage": "update",
-            "uuid": uuid,
-            "append": {
-                "amount": amount,
-                "selected_seats": selectedSeats
-            }
+        "isMessageFromAWebApp": true,
+        "stage": "update",
+        "uuid": uuid,
+        "append": {
+            "amount": amount,
+            "selected_seats": selectedSeats
+        }
         })
     });
 
     if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
-    } 
-    } 
+    }
+    }
     catch (error) {
     console.error("There was an error: ", error);
     }
